@@ -1,0 +1,18 @@
+[
+    {
+        "id":1,
+        "name":"Fantasy"
+    },
+    {
+        "id":2,
+        "name":"Fighting"
+    },
+    {
+        "id":3,
+        "name":"Family"
+    },
+    {
+        "id":4,
+        "name":"Economic"
+    }
+]
