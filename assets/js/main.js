@@ -1,190 +1,78 @@
-window.onload = () =>{
-
-    years=[];
-   // manufacturer=[];
-    moreInfo=[];
-    categories=[];
-    
-    $('#categories').change(filterChange);
-    $('#sort').change(filterChange);
-    $('#years').change(filterChange);
-    $("#searching").keyup(filterChange);
-    fetchData("years",showYears);
-    
-   //Ajax zahtev 
-    function fetchData(file,callback){
-        $.ajax({
-            url:"assets/data/" + file + ".json",
-            method:"get",
-            dataType:"json",
-            success:function(response){
-                callback(response);
-            },
-            error:function(err){
-                console.log(err)
-            }
-        });
-    }
-
-   //Ispisivanje proizvoda
-    function showProducts(products){
-     products=categoryFilter(products);
-     products=searchByName(products);
-     products=filterByAge(products);
-     products=sortByPrice(products);
-        html="";
-        for(let product of products){
-            html+=`
-            <div class="col-12 col-md-6 col-lg-4 mb-3">
-                <div class="card shadow h-100">
-                  <img src="assets/img/shop/${product.img.src}" class="card-img-top" alt="${product.img.alt}">
-                  <div class="card-body">
-                    <h5 class="card-title font-weight-bold">${product.name}</h5>
-                    <p class="card-text mb-2">${product.description}</p>
-                    <p class="card-text mb-2 font-weight-bold">Category: ${getCategory(product.categoryId)}</p>
-                    <button type="button" class="btn btn-sm btn-outline-dark mb-2" data-toggle="modal"
-                      data-target="#${product.popupId}">Read
-                      more</button>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <p class="card-text font-weight-bold m-0">$${product.price.newPrice}</p>
-                      <p class="card-text text-secondary"><s>$${product.price.oldPrice}</s></p>
-                    </div>
-                    <button type="button" class="btn im-btn px-3 mt-2" data-toggle="modal" data-target="#cart">Add to cart</button>
-                  </div>
-                </div>
-              </div>
-            `
-        }
-        $("#products").html(html);
-    }
-    
-    //Ispisivanje informacija
-    function showMoreInfo(array){
-        let html="";
-        for(let info of array){
-            html+=`
-            <div class="modal fade" id="${info.popupId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">${info.name}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p class="font-weight-bold">Number of players: ${info.players.min}-${info.players.max}</p>
-              <p class="font-weight-bold">Playing time: ${info.playingTime} Min</p>
-              <p class="font-weight-bold">Age: ${getAge(info.yearId)}</p>
-              <p>${info.moreInfo}</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn im-btn" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-            `
-        }
-        $("#modals").html(html);
-        moreInfo=array;
-        fetchData("products",showProducts);
-    }
-
-    //Ispis kategorija
-    function showCategories(array){
-      let html="";
-      for(let category of array){
-        html+=`<li class="list-group-item">
-        <input type="checkbox" value="${category.id}" class="category" name="categories"/> ${category.name}
-     </li>`
-      }
-      $("#categories").html(html);
-      categories=array;
-      fetchData("products",showMoreInfo);
-    }
-
-    //Ispis godina
-    function showYears(array){
-      let html="";
-      for(let year of array){
-        html+=`
-        <li class="list-group-item">
-        <input type="checkbox" value="${year.id}" class="age" name="age"/> ${year.value}+
-     </li>
-        `
-      }
-      $("#years").html(html);
-      years=array;
-      fetchData("categories",showCategories);
-    }
-    
-    //Dohvatanje godina
-    function getAge(yearId){
-        for(let age of years){
-            if(age.id==yearId){
-                return age.value + "+";
-            }
-        }
-    }
-
-    //Dohvatanje kategorija
-    function getCategory(categoryId){
-      let name="";
-      for(let id of categoryId){
-        for(let category of categories){
-          if(id==category.id){
-            name+=category.name + ", ";
-          }
-        }
-      }
-      return name.substring(0,name.length-2);
-    }
-
-    function filterChange(){
-      fetchData("products",showProducts);
-    }
-    
-    //Filtriranje po kategorijama
-    function categoryFilter(products){
-      let searchedCategories=[];
-      $('.category:checked').each(function(el){
-        searchedCategories.push(parseInt($(this).val()));
-      });
-      if(searchedCategories.length>0){
-        return products.filter(p=>p.categoryId.some(category=>searchedCategories.includes(category)));
-      }
-      else return products;
-    }
-    //Sortiranje po ceni
-    function sortByPrice(products){
-      let type=$('#sort').val();
-      if(type=="asc"){
-        products.sort();
-        return products.sort((a,b)=>a.price.newPrice-b.price.oldPrice);
-      }
-      if(type=="desc"){
-        return products.sort((a,b)=> b.price.newPrice-a.price.oldPrice);
-      }
-      else return products;
-    }
-    
-    //Pretraga po nazivu
-    function searchByName(products){
-      let typed=$('#searching').val().toLowerCase();
-      let filtered=products.filter(p=>p.name.toLowerCase().indexOf(typed)!=-1);
-      return filtered;
-    }
-
-    //Filtriranje po godinama
-    function filterByAge(products){
-      let age=[];
-      $('.age:checked').each(function(el){
-        age.push(parseInt($(this).val()));
-      })
-      if(age.length>0){
-        return products.filter(p=>age.includes(p.yearId));
-      }
-      else return products;
-    }
+$(document).ready(function () {
+  showAmountInCart();
+});
+//broj u korpi prikaz
+function showAmountInCart() {
+  let amountInCart = localStorage.getItem("amountInCart");
+  if (amountInCart == null) {
+    amountInCart = 0;
+  }
+  $("#amountInCart").html(amountInCart);
 }
+
+var html=`
+<div class="container">
+<div class="row align-items-center">
+  <div class="col-12 col-md-6 im-center">
+    <ul>
+      <li class="p-2">Phone: +702565626</li>
+      <li class="p-2">Address: 592 E Fremont St, Las Vegas</li>
+      <li class="p-2">Open hours: 8:00 - 18:00</li>
+      <li class="p-2">Email: beyondmonopoly@gmail.com</li>
+    </ul>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="wrapper">
+      <a href="https://www.facebook.com/" target="_blank">
+        <div class="icon Facebook">
+          <div class="tooltip">Facebook</div>
+          <span><i class="fab fa-facebook-f"></i></span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/" target="_blank">
+        <div class="icon Instagram">
+          <div class="tooltip">Instagram</div>
+          <span><i class="fab fa-instagram"></i></span>
+        </div>
+      </a>
+      <a href="https://twitter.com/" target="_blank">
+        <div class="icon Twitter">
+          <div class="tooltip">Twitter</div>
+          <span><i class="fab fa-twitter"></i></span>
+        </div>
+      </a>
+      <a href="xml/sitemap.xml" target="_blank">
+        <div class="icon Sitemap">
+          <div class="tooltip">SiteMap</div>
+          <span><i class="fas fa-sitemap"></i></span>
+        </div>
+      </a>
+      <a href="xml/rss.xml" target="_blank">
+        <div class="icon Rss">
+          <div class="tooltip">Rss</div>
+          <span><i class="fas fa-rss"></i></span>
+        </div>
+      </a>
+      <a href="documentation.pdf" target="_blank">
+        <div class="icon documentation">
+          <div class="tooltip">Doc</div>
+          <span><i class="fas fa-file"></i></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+<div class="container-fluid footer-copyright p-2">
+<div class="row">
+  <div class="col-12 col-md-6 text-center">
+    <p class="my-1">Ivana Maricic 40/20 | <a href="about.html" class="im-radial font-weight-bold">ABOUT</a></p>
+  </div>
+  <div class="col-12 col-md-6 text-center">
+    <p class="my-1">&copy; 2022 Copyright : <a href="index.html" class="im-radial font-weight-bold">Beyond
+        Monopoly</a></p>
+  </div>
+</div>
+</div>
+`
+$("#footer").html(html)
