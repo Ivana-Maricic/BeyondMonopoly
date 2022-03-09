@@ -1,92 +1,63 @@
-// form validation
+// validacija forme
+function validation(e) {
+  e.preventDefault();
 
-var imePrezime = document.getElementById("imePrezime");
-var email = document.getElementById("email");
-var number = document.getElementById("number");
-var message = document.getElementById("message");
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var number = document.getElementById("number").value;
+  var message = document.getElementById("message").value;
+  var gender = document.getElementsByName("rbGender");
+  var terms = document.getElementById("cbTerms");
+  var successfullValidation = true;
 
-var reImePrezime = /^[A-ZŠĐČĆŽ][a-zšđčćž]{2,15}(\s[A-ZŠĐČĆŽ][a-zšđčćž]{2,20})+$/;
-var reEmail = /^[\w-\.]+@([\w-]{2,}\.)+[a-z]{2,}$/;
-var reNumber =/^06[0-689][0-9]{6,7}$/;  
-var reMessage = /.{4,200}/;  
+  var reName = /^[A-ZŠĐČĆŽ][a-zšđčćž]{2,15}(\s[A-ZŠĐČĆŽ][a-zšđčćž]{2,20})+$/;
+  var reEmail = /^[\w-\.]+@([\w-]{2,}\.)+[a-z]{2,}$/;
+  var reNumber = /^06[0-689][0-9]{6,7}$/;
+  var reMessage = /.{4,200}/;
 
-var noErrors;
-var errorName = document.getElementById("error-name");
-var errorEmail =  document.getElementById("error-email");
-var errorNumber = document.getElementById("error-number");
-var errorMsg =  document.getElementById("error-message");
-
-
-imePrezime.addEventListener("blur", checkName);
-function checkName() {
-  var check = reImePrezime.test(imePrezime.value);
-  if(check) {
-    errorName.innerHTML="Name is valid!";
-    errorName.style.color="green";
- } 
-  else {
-  noErrors = false;
-  errorName.innerHTML="Name is not valid!";
-  errorName.style.color="red";
- }
+  if (reName.test(name)) {
+    document.getElementById("nameerror").innerHTML = " ";
+  } else {
+    document.getElementById("nameerror").innerHTML =
+      "** Name is required and can contain only letters";
+    successfullValidation = false;
+  }
+  if (reEmail.test(email)) {
+    document.getElementById("emailerror").innerHTML = " ";
+  } else {
+    document.getElementById("emailerror").innerHTML =
+      "** Email is required and must be in a correct email format.";
+    successfullValidation = false;
+  }
+  if (reNumber.test(number)) {
+    document.getElementById("numbererror").innerHTML = " ";
+  } else {
+    document.getElementById("numbererror").innerHTML =
+      "** number is required and must be in a correct number format.";
+    successfullValidation = false;
+  }
+  if (reMessage.test(message)) {
+    document.getElementById("messageerror").innerHTML = " ";
+  } else {
+    document.getElementById("messageerror").innerHTML =
+      "** Message is required and can contain max 250 characters.";
+    successfullValidation = false;
+  }
+  if (!(gender[0].checked || gender[1].checked)) {
+    document.getElementById("gendererror").innerHTML =
+      "** Choose at least one option ";
+    successfullValidation = false;
+  } else {
+    document.getElementById("gendererror").innerHTML = " ";
+  }
+  if (terms.checked) {
+    document.getElementById("checkboxerror").innerHTML = " ";
+  } else {
+    document.getElementById("checkboxerror").innerHTML =
+      "** You must check this box";
+    successfullValidation = false;
+  }
+  if (successfullValidation) {
+    document.getElementById("contact").reset();
+  }
 }
-
-email.addEventListener("blur", checkEmail);
-function checkEmail() {
- var check = reEmail.test(email.value);
- if(check) {
-  errorEmail.innerHTML="Email is valid!";
-  errorEmail.style.color="green";
- } 
- else {
- noErrors = false;
-  errorEmail.innerHTML="Email is not valid!";
-  errorEmail.style.color="Red";
- }
-}
-
-number.addEventListener("blur", checkNumber);
-function checkNumber(){
-    var check = reNumber.test(number.value);
-    if(check) {
-        errorNumber.innerHTML="Number is valid!";
-        errorNumber.style.color="green";
-       } 
-       else {
-       noErrors = false;
-       errorNumber.innerHTML="Number is not valid!";
-       errorNumber.style.color="Red";
-       }
-}
-
-message.addEventListener("blur", checkMsg);
-function checkMsg() {
- if (message.value == "") {
-  errorMsg.textContent = "Message can`t be empty";
-  errorMsg.style.color="red";
-}
-  else {
-  errorMsg.textContent = "Message is valid";
-  errorMsg.style.color="green";
- }
-}
-
- var btnSubmitMessage = document.getElementById("btnSubmitMessage");
-
-  btnSubmitMessage.addEventListener("click", function() {
-  noErrors = true;
-  checkName();
-  checkEmail();
-  checkNumber();
-  checkMsg();
-  if(noErrors) {
-  imePrezime.value = "";
-  number.value = "";
-  email.value = "";
-  message.value = "";
-  errorName.innerHTML='';
-  errorEmail.innerHTML='';
-  errorNumber.innerHTML='';
-  errorMsg.innerHTML='';
-}
-})
