@@ -12,7 +12,7 @@ function showCart() {
     for (let cartItem of cart) {
       let product = products.filter((x) => x.id == cartItem.id)[0];
       html += `<tr>
-            <td class="cart-picture"><img src="assets/img/shop/${
+            <td class="cart-picture"><img src="assets/img/${
               product.img.src
             }" class="card-img-top" alt="${product.img.alt}"></td>
             <td class="font-weight-bold im-fontSize">${product.name}</td>
