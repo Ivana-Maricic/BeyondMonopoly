@@ -35,12 +35,6 @@ var html=`
           <span><i class="fab fa-instagram"></i></span>
         </div>
       </a>
-      <a href="https://twitter.com/" target="_blank">
-        <div class="icon Twitter">
-          <div class="tooltip">Twitter</div>
-          <span><i class="fab fa-twitter"></i></span>
-        </div>
-      </a>
       <a href="xml/sitemap.xml" target="_blank">
         <div class="icon Sitemap">
           <div class="tooltip">SiteMap</div>
