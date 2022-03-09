@@ -1,8 +1,25 @@
-@media screen and (max-width: 769px){
-    .heading h1 {font-size: 30px;}
-    .heading2 h3 {font-size: 22px;}
-    .im-center{text-align: center;}
+@media screen and (max-width: 994px) {
+  .amountInCart {
+    left: 25px;
+    right: 0;
+  }
+  .sort{
+    margin-bottom:10px;
+  }
 }
-@media screen and (max-width:427px){
-    .im-mb{margin-bottom: 0 !important;}
+@media screen and (max-width: 769px) {
+  .heading h1 {
+    font-size: 30px;
+  }
+  .heading2 h3 {
+    font-size: 22px;
+  }
+  .im-center {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 427px) {
+  .im-mb {
+    margin-bottom: 0 !important;
+  }
 }
