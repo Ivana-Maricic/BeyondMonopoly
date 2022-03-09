@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+<channel>
+  <title>Beyond Monopoly HomePage</title>
+  <link>https://ivana-maricic.github.io/BeyondMonopoly/index.html</link>
+  <description>New most played games!</description>
+  <item>
+    <title>Store</title>
+    <link>https://ivana-maricic.github.io/BeyondMonopoly/index.html</link>
+    <description>We updated our store!</description>
+  </item>
+</channel>
+
+</rss>
