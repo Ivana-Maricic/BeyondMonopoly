@@ -39,7 +39,7 @@ function showCart() {
     $("#message").html(
       `<div class="font-weight-bold text-right im-fontSize pr-4">YOUR TOTAL IS : $${totalPrice.toFixed(
         2
-      )}</div>`
+      )}<button type="button" class="btn btn-dark ml-2">Checkout</button></div>`
     );
     $("#cartTable").html(html);
   } else {
