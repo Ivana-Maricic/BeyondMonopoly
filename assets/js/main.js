@@ -1,6 +1,7 @@
 $(document).ready(function () {
   showAmountInCart();
 });
+
 //broj u korpi prikaz
 function showAmountInCart() {
   let amountInCart = localStorage.getItem("amountInCart");
@@ -10,6 +11,52 @@ function showAmountInCart() {
   $("#amountInCart").html(amountInCart);
 }
 
+//dinamicko ispisivanje navigacije
+var html=` <nav class="navbar navbar-expand-lg navbar-light">
+<a class="navbar-brand" href="index.html">
+    <img src="assets/img/logo.png" alt="logo" class="im-logo" />
+</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse text-uppercase" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item active navHover  mx-2 font-weight-bold">
+            <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item navHover mx-2 font-weight-bold">
+            <a class="nav-link" href="shop.html">Shop</a>
+        </li>
+        <li class="nav-item navHover mx-2 font-weight-bold">
+            <a class="nav-link" href="jointheclub.html">Join the club</a>
+        </li>
+        <li class="nav-item mx-2 font-weight-bold" id="notli">
+            <a class="nav-link" style="position: relative;" href="cart.html"><i
+                    class="fas fa-shopping-cart"></i>
+                <div class="amountInCart font-weight-bold im-radial" id="amountInCart"></div>
+            </a>
+        </li>
+    </ul>
+</div>
+</nav>`
+$("#navigation").html(html);
+
+//dodavanje klase active
+function activeClass(){
+$(function() {
+  var path = window.location.href.substring(window.location.href.lastIndexOf("/")+1);
+  $("li.nav-item > a").each(function(){
+       if($(this).attr("href") == path || $(this).attr("href") == '' ){
+       $(this).addClass("active");
+       $(this).addClass("im-radial");
+      }
+  })
+});
+}
+activeClass();
+
+//dinamicko ispisivanje footera
 var html=`
 <div class="container">
 <div class="row align-items-center">
@@ -69,4 +116,4 @@ var html=`
 </div>
 </div>
 `
-$("#footer").html(html)
+$("#footer").html(html);
