@@ -34,6 +34,23 @@ ul {
   height: auto !important;
 }
 
+/* preloader */
+
+.loading {
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff;
+	z-index: 1000000;
+}
+
+.loading img {
+	width: 25%;
+}
+/* NAV */
 /* NAV */
 
 .navbar {
