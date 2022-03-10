@@ -11,6 +11,19 @@ function showAmountInCart() {
   $("#amountInCart").html(amountInCart);
 }
 
+//preloader
+$(window).ready(() => {
+  setTimeout(() => {
+      $('.loading').animate({
+          opacity: 0
+      }, 300)
+  }, 1000)
+
+  setTimeout(() => {
+      $('.loading').remove()
+  }, 3000)
+})
+
 //dinamicko ispisivanje navigacije
 var html=` <nav class="navbar navbar-expand-lg navbar-light">
 <a class="navbar-brand" href="index.html">
