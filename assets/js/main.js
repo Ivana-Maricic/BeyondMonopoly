@@ -17,7 +17,7 @@ $(window).ready(() => {
       $('.loading').animate({
           opacity: 0
       }, 300)
-  }, 1000)
+  }, 3000)
 
   setTimeout(() => {
       $('.loading').remove()
