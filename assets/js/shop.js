@@ -19,6 +19,7 @@ window.onload = () => {
         callback(response);
       },
       error: function (err) {
+        $("#products").html("There was an error loading the data. Please try again later.")
         console.log(err);
       },
     });
@@ -27,30 +28,30 @@ window.onload = () => {
   //Ispisivanje proizvoda
   function showProducts(products) {
     localStorage.setItem("allProducts", JSON.stringify(products));
-  
+    
     products = categoryFilter(products);
     products = searchByName(products);
     products = filterByAge(products);
     products = sortByPrice(products);
+    
     if(products.length == 0) {
       $("#products").empty();
-      $("#shopMessage").html("<p>No products</p>");
+      $("#shopMessage").show();
       return;
     }
-    html = "";
+    $("#shopMessage").hide();
+    var html = "";  
     for (let product of products) {
       html += `
             <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="card shadow h-100">
-                  <img src="assets/img/${
+                  <img src="assets/img/shop/${
                     product.img.src
                   }" class="card-img-top" alt="${product.img.alt}">
                   <div class="card-body">
                     <h5 class="card-title font-weight-bold">${product.name}</h5>
                     <p class="card-text mb-2">${product.description}</p>
-                    <p class="card-text mb-2 font-weight-bold">Category: ${getCategory(
-                      product.categoryId
-                    )}</p>
+                    <p class="card-text mb-2 font-weight-bold">Category: ${getCategory(product.categoryId)}</p>
                     <button type="button" class="btn btn-sm btn-outline-dark mb-2" data-toggle="modal"
                       data-target="#${product.popupId}">Read
                       more</button>
@@ -73,9 +74,11 @@ window.onload = () => {
     $("#products").html(html);
   }
 
+  
   //Ispisivanje informacija
   function showMoreInfo(array) {
     let html = "";
+    
     for (let info of array) {
       html += `
             <div class="modal fade" id="${
@@ -180,6 +183,7 @@ window.onload = () => {
       );
     } else return products;
   }
+  
   //Sortiranje po ceni
   function sortByPrice(products) {
     let type = $("#sort").val();
@@ -212,13 +216,13 @@ window.onload = () => {
     } else return products;
   }
 };
+
 //dodavanje u korpu
 function addToCart(productId) {
   let cart = JSON.parse(localStorage.getItem("cart"));
   if (cart == null) {
     cart = [];
   }
-
   if (cart.filter((x) => x.id == productId).length == 0) {
     cart.push({
       id: productId,
@@ -233,13 +237,15 @@ function addToCart(productId) {
     }
   }
   localStorage.setItem("cart", JSON.stringify(cart));
-  //broj u korpi
   let amountInCart = localStorage.getItem("amountInCart");
   if (amountInCart == null) {
     amountInCart = 0;
   }
   amountInCart++;
-  $("#amountInCart").html(amountInCart);
-
+  $("#amountInCart").html(amountInCart); 
   localStorage.setItem("amountInCart", amountInCart);
+    $( "#popUp" ).show(); 
+    setTimeout(function() {
+       $( "#popUp" ).hide();
+     }, 1200);
 }
