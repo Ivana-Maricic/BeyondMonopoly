@@ -6,13 +6,18 @@ function showCart() {
   let cart = JSON.parse(localStorage.getItem("cart"));
   let html = "";
   let totalPrice = 0;
-  if (cart != null) {
+  if (cart == null) {
+    $("#cartTable").empty();
+    $("#total").empty();
+    $("#message").show();
+    return;
+  }
+  $("#message").hide();
     let products = JSON.parse(localStorage.getItem("allProducts"));
-
     for (let cartItem of cart) {
       let product = products.filter((x) => x.id == cartItem.id)[0];
       html += `<tr>
-            <td class="cart-picture"><img src="assets/img/${
+            <td class="cart-picture"><img src="assets/img/shop/${
               product.img.src
             }" class="card-img-top" alt="${product.img.alt}"></td>
             <td class="font-weight-bold im-fontSize">${product.name}</td>
@@ -36,20 +41,15 @@ function showCart() {
             `;
       totalPrice += product.price.newPrice * cartItem.amount;
     }
-    $("#message").html(
-      `<div class="font-weight-bold text-right im-fontSize pr-4">YOUR TOTAL IS : $${totalPrice.toFixed(
+    $("#total").html(
+      `<div class="font-weight-bold text-right im-fontSize">YOUR TOTAL IS : $${totalPrice.toFixed(
         2
       )}<button type="button" class="btn btn-dark ml-2">Checkout</button></div>`
     );
     $("#cartTable").html(html);
-  } else {
-    html = "Your cart is empty. Go shopping!";
-    $("#cartTable").html("");
-    $("#message").html(html);
-  }
   let amount = Number(localStorage.getItem("amountInCart"));
   $("#amountInCart").html(amount);
-}
+      }
 //brisanje iz korpe
 function removeFromCart(productId) {
   let cart = JSON.parse(localStorage.getItem("cart"));
