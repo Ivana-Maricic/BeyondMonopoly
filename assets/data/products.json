@@ -8,7 +8,7 @@
             "newPrice":139.99
         },
         "img":{
-            "alt":"game",
+            "alt":"Gloomhaven",
             "src":"s1.jpg"
         },
         "manufacturerId":1,
@@ -31,7 +31,7 @@
             "newPrice":19.82
         },
         "img":{
-            "alt":"game",
+            "alt":"Exploding Kittens",
             "src":"kittens.png"
         },
         "manufacturerId":1,
@@ -54,7 +54,7 @@
             "newPrice":79.99
         },
         "img":{
-            "alt":"game",
+            "alt":"Pandemic Legacy",
             "src":"s3.png"
         },
         "manufacturerId":2,
@@ -77,7 +77,7 @@
             "newPrice":149.95
         },
         "img":{
-            "alt":"game",
+            "alt":"Gaia Project",
             "src":"gaia1.jpg"
         },
         "manufacturerId":1,
@@ -100,7 +100,7 @@
             "newPrice":65.99
         },
         "img":{
-            "alt":"game",
+            "alt":"Caverna: The Cave Farmers",
             "src":"caverna.jpg"
         },
         "manufacturerId":2,
@@ -123,7 +123,7 @@
             "newPrice":84.11
         },
         "img":{
-            "alt":"game",
+            "alt":"A Feast for Odin",
             "src":"feast1.jpg"
         },
         "manufacturerId":1,
@@ -146,7 +146,7 @@
             "newPrice":79.99
         },
         "img":{
-            "alt":"game",
+            "alt":"Terra Mystica",
             "src":"s51.jpg"
         },
         "manufacturerId":1,
@@ -169,7 +169,7 @@
             "newPrice":49.99
         },
         "img":{
-            "alt":"game",
+            "alt":"The Castles of Burgundy",
             "src":"burgundy1.jpg"
         },
         "manufacturerId":2,
@@ -193,7 +193,7 @@
             "newPrice":67.49
         },
         "img":{
-            "alt":"game",
+            "alt":"Brass: Birmingham",
             "src":"brass.jpg"
         },
         "manufacturerId":1,
@@ -216,7 +216,7 @@
             "newPrice":99.95
         },
         "img":{
-            "alt":"game",
+            "alt":"Star Wars: Rebellion",
             "src":"rebelion.jpg"
         },
         "manufacturerId":1,
@@ -239,7 +239,7 @@
             "newPrice":69.95
         },
         "img":{
-            "alt":"game",
+            "alt":"Terraforming Mars",
             "src":"mars.jpg"
         },
         "manufacturerId":1,
@@ -262,7 +262,7 @@
             "newPrice":116.82
         },
         "img":{
-            "alt":"game",
+            "alt":"Spirit Island",
             "src":"spirit.png"
         },
         "manufacturerId":1,
