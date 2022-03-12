@@ -17,11 +17,11 @@ $(window).ready(() => {
       $('.loading').animate({
           opacity: 0
       }, 300)
-  }, 3000)
+  }, 600)
 
   setTimeout(() => {
       $('.loading').remove()
-  }, 3000)
+  }, 600)
 })
 
 //dinamicko ispisivanje navigacije
