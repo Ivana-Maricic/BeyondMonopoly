@@ -27,11 +27,16 @@ window.onload = () => {
   //Ispisivanje proizvoda
   function showProducts(products) {
     localStorage.setItem("allProducts", JSON.stringify(products));
-
+  
     products = categoryFilter(products);
     products = searchByName(products);
     products = filterByAge(products);
     products = sortByPrice(products);
+    if(products.length == 0) {
+      $("#products").empty();
+      $("#shopMessage").html("<p>No products</p>");
+      return;
+    }
     html = "";
     for (let product of products) {
       html += `
