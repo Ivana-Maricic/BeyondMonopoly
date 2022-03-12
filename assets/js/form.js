@@ -33,7 +33,7 @@ function validation(e) {
     document.getElementById("numbererror").innerHTML = " ";
   } else {
     document.getElementById("numbererror").innerHTML =
-      "** number is required and must be in a correct number format.";
+      "** Number is required and must be in a correct number format.";
     successfullValidation = false;
   }
   if (reMessage.test(message)) {
