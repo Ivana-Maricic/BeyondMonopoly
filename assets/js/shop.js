@@ -45,7 +45,7 @@ window.onload = () => {
       html += `
             <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="card shadow h-100">
-                  <img src="assets/img/shop/${
+                  <img src="assets/img/${
                     product.img.src
                   }" class="card-img-top" alt="${product.img.alt}">
                   <div class="card-body">
